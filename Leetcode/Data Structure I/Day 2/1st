@@ -1,0 +1,33 @@
+1) Easy to understand (Basic Solution)
+
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        l=[]
+        for i in range(len(nums)-1):
+            for j in range(i+1,len(nums)):
+                if nums[i] + nums[j] == target :
+                    l.append(i)
+                    l.append(j)
+                    return l
+
+Solution 2: Using Hashmap (https://www.code-recipe.com/post/two-sum)
+
+class Solution:
+   def twoSum(self, nums: List[int], target: int) -> List[int]:
+       seen = {}
+       for i, value in enumerate(nums):
+           remaining = target - nums[i]
+           
+           if remaining in seen:
+               return [i, seen[remaining]]
+            
+           seen[value] = i 
+
+class Solution:
+  def twoSum(self, nums: List[int], target: int) -> List[int]:
+  dict={}
+  for idx,val in enumerate(nums):
+      if target-val in dict:
+          return [dict.get(target-val),idx]
+       else:
+      dict[val]=idx
