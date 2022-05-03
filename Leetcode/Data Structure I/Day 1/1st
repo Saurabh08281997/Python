@@ -1,0 +1,33 @@
+1) Sort
+
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        nums.sort()
+        for i in range(len(nums)-1):
+            if nums[i]==nums[i+1]:
+                return True
+        return False
+
+2. Set
+
+This approach is the most "Pythonic," but not the most efficient. Simply check the length of the list against the length of a set.
+
+class Solution:
+	def containsDuplicate(self, nums: List[int]) -> bool:
+		return len(nums) != len(set(nums))
+
+3. Dictionary
+
+This approach is not as concise, but is slightly more efficient. Store each number as a key in a dictionary, with the amount of times that number occurred in the list as the value. The moment a key shows up more than once, we know that duplicates exist.
+
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        counts = {}
+        
+        for num in nums:
+            if counts.get(num) is not None:
+                return True
+            
+            counts[num] = 1
+            
+        return False
