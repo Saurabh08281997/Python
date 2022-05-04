@@ -1,0 +1,48 @@
+1) Sliding Window
+
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        max_profit = 0
+        buy_day = 0
+        
+        for sale_day in range(1, len(prices)):
+            
+            # if the price at buy day is greater than the price on sale/current day, then sale price is =< 0
+            # if so it is better to pick that day to buy, so we reduce the window
+            if prices[sale_day] < prices[buy_day]:
+                buy_day = sale_day
+            else:
+                sale_price = prices[sale_day] - prices[buy_day]
+                max_profit = max(max_profit, sale_price)
+                
+        return max_profit
+
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        # corner case
+        if len(prices) == 1:
+            return 0
+        # buy at lowest, sell at highest
+        low = high = prices[0]
+        diff = 0
+        for p in prices[1:]:
+            if p > high:
+                high = p
+                if high - low > diff:
+                    diff = high - low
+            if p < low:
+                low = p
+                high = -1
+        return diff
+# Space Complexity O(1) | integer values low,high,diff only
+# Time Complexity O(n) | iterates over each element in nums of length n for a constant time operation of comparisons
+# beats 99.88% submissions in runtime, 39.98% submissions in memory usage
+
+2) Brute force
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        profit = 0
+        for i in range(len(prices)-1):
+            if profit < max(prices[i+1:]) - prices[i] :
+                profit = max(prices[i+1:]) - prices[i]
+        return profit
